@@ -21,7 +21,7 @@
     <a href="https://www.zhihu.com/people/zi-shen-si">
         <img src="https://img.shields.io/badge/%E7%9F%A5%E4%B9%8E-zhihu-%23bce2ef" alt="知乎|BWH_Steven">
     </a>
-</p>
+</p>  
 
 ## 🔥️ 关于 Java-Ideal-Interview
 
@@ -42,6 +42,12 @@ PC 端文章阅读可选择：掘金、知乎、我的个人博客
 
 移动端最佳阅读方式为微信公众号：【理想二旬不止】（ 40w+ 字数干货输出，以及资源分享等你来）
 
+注：所有涉及图片未使用网络图床，均开源提供给大家。
+
+持续更新中，在线阅读将会在后期提供，若认为 Gitee 或 Github 阅读不便，可克隆到本地配合 Typora 等编辑器舒适阅读
+
+若 Github 克隆速度过慢，可选择使用国内 Gitee 仓库 [Java-Ideal-Interview - 码云（Gitee） ](https://gitee.com/ideal-20/java-ideal-interview)
+
 1. [掘金@BWH_Steven](https://juejin.cn/user/1591748568815655)
 2. [知乎@BWH_Steven](https://www.zhihu.com/people/zi-shen-si)
 3. [个人博客@BWH_Steven](https://www.ideal-20.cn)
@@ -49,7 +55,8 @@ PC 端文章阅读可选择：掘金、知乎、我的个人博客
 
 <p align="center">
     <img src="images/common-002.jpg" style="zoom:80%">
-</p>
+</p>  
+
 ## 📖 目录：
 
 ### ☕ 一 JavaSE
