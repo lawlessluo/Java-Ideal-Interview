@@ -49,7 +49,8 @@ PC 端文章阅读可选择：掘金、知乎、我的个人博客
 
 <p align="center">
     <img src="images/common-002.jpg" style="zoom:80%">
-</p>
+</p>  
+
 ## 📖 目录：
 
 ### ☕ 一 JavaSE
