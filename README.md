@@ -73,6 +73,7 @@ PC 端文章阅读可选择：掘金、知乎、我的个人博客
 
 1. **[001-ArrayList源码分析（含扩容机制等重点问题分析）](docs/java/javase-basis/collection/001-ArrayList源码分析（含扩容机制等重点问题分析）.md)**
 2. **[002-LinkedList源码分析（重点方法基本分析）](docs/java/javase-basis/collection/002-LinkedList源码分析（重点方法基本分析）.md)**
+3. **[003-HashMap源码分析（含散列表 + 红黑树介绍）](docs/java/javase-basis/collection/003-HashMap源码分析（含散列表 + 红黑树介绍）.md)**
 
 2021 持续更新中，Star 不迷路，常回来看看哈 ......
 
