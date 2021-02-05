@@ -657,7 +657,7 @@ public class StringBuilderDemo {
 
 使用String方式进行拼接，我们反编译可以看到，StringBuilder被创建在循环的内部，这意味着每循环一次就会创建一次StringBuilder对象，这可是一个糟糕的事情。
 
- <div align="center">
+<div align="center">
 	<img src="images/java-javase-basis-005.png" style="zoom:60%">
 </div>
 
