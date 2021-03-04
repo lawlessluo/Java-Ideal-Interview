@@ -1,3 +1,45 @@
+---
+面试专题-JavaSE-集合-001-ArrayList源码分析
+---
+
+
+
+- [一 ArrayList 源码分析（含扩容机制分析）](#一-arraylist-源码分析含扩容机制分析)
+  - [1. ArrayList 概述](#1-arraylist-概述)
+    - [1.1  List 是什么？](#11-list-是什么)
+    - [1.2  ArrayList 是什么？](#12-arraylist-是什么)
+    - [1.3 顺序表的优缺点](#13-顺序表的优缺点)
+    - [1.4 时间复杂度证明](#14-时间复杂度证明)
+  - [2. 核心源码分析](#2-核心源码分析)
+    - [2.1 类声明](#21-类声明)
+    - [2.2 类成员](#22-类成员)
+    - [2.4 构造方法](#24-构造方法)
+    - [2.5 最小化实例容量方法](#25-最小化实例容量方法)
+    - [2.5 扩容方法](#25-扩容方法)
+    - [2.6 常规方法](#26-常规方法)
+  - [3. 重点内容分析](#3-重点内容分析)
+    - [3.1 扩容机制再分析](#31-扩容机制再分析)
+      - [3.1.1 ArrayList 是如何被初始化的](#311-arraylist-是如何被初始化的)
+      - [3.1.2 扩容机制流程分析（无参构造为例）](#312-扩容机制流程分析无参构造为例)
+        - [3.1.2.1 add()](#3121-add)
+        - [3.1.2.2 ensureCapacityInternal()](#3122-ensurecapacityinternal)
+        - [3.1.2.3 calculateCapacity()](#3123-calculatecapacity)
+        - [3.1.2.4 ensureExplicitCapacity](#3124-ensureexplicitcapacity)
+        - [3.1.2.5 grow()](#3125-grow)
+        - [3.1.2.6 hugeCapacity()](#3126-hugecapacity)
+    - [3.2 System.arraycopy() 和 Arrays.copyOf() 复制方法](#32-systemarraycopy-和-arrayscopyof-复制方法)
+      - [3.2.1 System.arraycopy()](#321-systemarraycopy)
+      - [3.2.2  Arrays.copyOf()](#322-arrayscopyof)
+    - [3.3 removeAll() 和 retainAll() 中的 batchRemove() 方法](#33-removeall-和-retainall-中的-batchremove-方法)
+    - [3.4 并发修改异常问题探索](#34-并发修改异常问题探索)
+      - [3.4.1 原因解释：](#341-原因解释)
+      - [3.4.2 解决方案：](#342-解决方案)
+        - [3.4.2.1 方式1：迭代器迭代元素，迭代器修改元素](#3421-方式1迭代器迭代元素迭代器修改元素)
+        - [3.4.2.1 方式2：集合遍历元素，集合修改元素（普通for）](#3421-方式2集合遍历元素集合修改元素普通for)
+      - [3.4.3 iterator.remove() 的弊端](#343-iteratorremove-的弊端)
+
+
+
 # 一 ArrayList 源码分析（含扩容机制分析）
 
 ## 1. ArrayList 概述
@@ -10,6 +52,8 @@
 
 
 List 在 Collection中充当着一个什么样的身份呢？——有序的 collection(也称为序列) 
+
+
 
 实现这个接口的用户以对列表中每个元素的插入位置进行精确地控制。用户可以根据元素的整数索引（在列表中的位置）访问元素，并搜索列表中的元素。与 set 不同，列表通常允许重复的元素。
 

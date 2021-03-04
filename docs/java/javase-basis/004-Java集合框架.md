@@ -1,3 +1,44 @@
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [四 集合框架](#四-集合框架)
+  - [1. Java 集合框架概述](#1-java-集合框架概述)
+    - [1.1 什么是集合框架](#11-什么是集合框架)
+      - [1.1.1 数组和集合的区别?](#111-数组和集合的区别)
+    - [1.2 集合框架体系结构](#12-集合框架体系结构)
+    - [1.3 请说明Java集合类框架的基本接口有哪些？](#13-请说明java集合类框架的基本接口有哪些)
+    - [1.4 说一说 Java 常见集合的数据结构以及其特点](#14-说一说-java-常见集合的数据结构以及其特点)
+      - [1.4.1 List](#141-list)
+      - [1.4.2 Map](#142-map)
+      - [1.4.3 Set](#143-set)
+    - [1.5 Collection和Collections的区别](#15-collection和collections的区别)
+    - [1.6 请简单说明一下什么是迭代器？](#16-请简单说明一下什么是迭代器)
+    - [1.7 请你说说Iterator和ListIterator的区别？](#17-请你说说iterator和listiterator的区别)
+  - [2. List 接口](#2-list-接口)
+    - [2.1 阐述 ArrayList 分别与 Vector、LinkedList 的异同点](#21-阐述-arraylist-分别与-vector-linkedlist-的异同点)
+      - [2.1.1 ArrayList 与 Vector](#211-arraylist-与-vector)
+      - [2.1.2 ArrayList 与 LinkedList](#212-arraylist-与-linkedlist)
+    - [2.2 ArrayLsit 扩容机制和并发修改异常（请跳转）](#22-arraylsit-扩容机制和并发修改异常请跳转)
+    - [2.3 ArrayList集合加入指定大量数据，应该怎么提高效率](#23-arraylist集合加入指定大量数据应该怎么提高效率)
+  - [3. Set 接口](#3-set-接口)
+    - [3.1 Set 无序性是怎么理解的](#31-set-无序性是怎么理解的)
+    - [3.2 1.4.4. HashSet 如何检查重复](#32-144-hashset-如何检查重复)
+  - [4. Map 接口](#4-map-接口)
+    - [4.1 HashMap 与 HashTable 、HashSet、HashMap 等的区别](#41-hashmap-与-hashtable-hashset-hashmap-等的区别)
+      - [4.1.1 HashMap 与 HashTable](#411-hashmap-与-hashtable)
+      - [4.1.2 HashMap 与 HashSet](#412-hashmap-与-hashset)
+      - [4.1.3 HashMap 与 TreeMap](#413-hashmap-与-treemap)
+    - [4.2 HashMap 的长度为什么是 2 的幂次方](#42-hashmap-的长度为什么是-2-的幂次方)
+    - [4.3 hash() 中的扰动函数如何解决Hash冲突 ※](#43-hash-中的扰动函数如何解决hash冲突)
+    - [4.4 简单谈谈 HashMap 中的底层原理](#44-简单谈谈-hashmap-中的底层原理)
+      - [4.4.1 JDK 1.8 之前](#441-jdk-18-之前)
+      - [4.4.2 JDK 1.8](#442-jdk-18)
+    - [4.5 HashMap 中加载因子的理解](#45-hashmap-中加载因子的理解)
+    - [4.6 ConcurrentHashMap 和 Hashtable 的区别](#46-concurrenthashmap-和-hashtable-的区别)
+
+<!-- /code_chunk_output -->
+
 # 四 集合框架
 
 ## 1. Java 集合框架概述
@@ -240,5 +281,14 @@ HashTable 虽然也满足线程安全，但是类似 Vector， 是一个Java遗�
 
 - 注：虽然 JDK 1.8 的源码中还能看到 Segment  ，但是主要也只是为了兼容旧版本了
 
+<div align="center">
+	<img src="images/java-javase-basis-008-supplement-001.png" style="zoom:80%">
+</div>
 
+<div align="center">
+	<img src="images/java-javase-basis-008-supplement-002.png" style="zoom:80%">
+</div>
 
+<div align="center">
+	<img src="images/java-javase-basis-008-supplement-003.png" style="zoom:80%">
+</div>

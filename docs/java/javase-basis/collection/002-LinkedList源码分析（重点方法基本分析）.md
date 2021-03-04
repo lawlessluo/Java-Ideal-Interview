@@ -1,3 +1,37 @@
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [LinkedList 源码分析](#linkedlist-源码分析)
+  - [1. LinkedList 概述](#1-linkedlist-概述)
+    - [1.1  List 是什么？](#11-list-是什么)
+    - [1.2  LinkedList 是什么？](#12-linkedlist-是什么)
+  - [2. 源码分析](#2-源码分析)
+    - [2.1 类声明](#21-类声明)
+    - [2.2 成员](#22-成员)
+    - [2.3 内部私有类 Node 类](#23-内部私有类-node-类)
+    - [2.4 构造方法](#24-构造方法)
+    - [2.5 添加方法](#25-添加方法)
+      - [2.5.1 add(E e)](#251-adde-e)
+      - [2.5.2 add(int index, E element)](#252-addint-index-e-element)
+      - [2.5.3 addLast(E e)](#253-addlaste-e)
+      - [2.5.4 addFirst(E e)](#254-addfirste-e)
+      - [2.5.5 addAll(Collection  c )](#255-addallcollection-c)
+    - [2.6 获取方法](#26-获取方法)
+      - [2.6.1 get(int index)](#261-getint-index)
+      - [2.6.2 获取头结点方法](#262-获取头结点方法)
+      - [2.6.3 获取尾节点方法](#263-获取尾节点方法)
+      - [2.6.4 根据对象得到索引](#264-根据对象得到索引)
+        - [2.6.4.1 从头到尾找](#2641-从头到尾找)
+        - [2.6.4.1 从尾到头找](#2641-从尾到头找)
+      - [2.6.5 contains(Object o)](#265-containsobject-o)
+    - [2.7 删除方法](#27-删除方法)
+      - [2.7.1 remove(int index)](#271-removeint-index)
+      - [2.7.2 **remove(Object o)**](#272-removeobject-o)
+      - [2.7.3 删除头结点](#273-删除头结点)
+
+<!-- /code_chunk_output -->
+
 # LinkedList 源码分析
 
 ## 1. LinkedList 概述
