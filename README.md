@@ -67,7 +67,7 @@ PC 端文章阅读可选择：掘金、知乎、我的个人博客
 2. **[002-Java 面向对象（类与对象 封装继承多态...）](docs/java/javase-basis/002-Java面向对象.md)**
 3. **[003-Java 常见对象（Object String ..）](docs/java/javase-basis/003-Java常见对象.md)**
 4. **[004-Java 集合（List、Set、Map 等）相关问答归纳再整理](docs/java/javase-basis/004-Java集合框架.md)**
-5. [005-Java IO 异常 简单小结](docs/java/javase-basis/005-Java IO 异常.md)
+5. **[005-Java IO 异常 简单小结](docs/java/javase-basis/005-JavaIO和异常.md)**
 
 **知识点：**
 
@@ -81,7 +81,7 @@ PC 端文章阅读可选择：掘金、知乎、我的个人博客
 
 **知识问答总结**
 
-1. [001-多线程及并发知识问答总结.md](docs/java/multi-threading/001-多线程及并发知识问答总结.md)
+1. **[001-多线程及并发知识问答总结.md](docs/java/multi-threading/001-多线程及并发知识问答总结.md)**
 
 2021 持续更新中，Star 不迷路，常回来看看哈 ......
 
