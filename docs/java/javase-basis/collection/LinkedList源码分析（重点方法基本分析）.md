@@ -1,63 +1,22 @@
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+# 1. LinkedList 概述
 
-<!-- code_chunk_output -->
+## 1.1  List 是什么？
 
-- [LinkedList 源码分析](#linkedlist-源码分析)
-  - [1. LinkedList 概述](#1-linkedlist-概述)
-    - [1.1  List 是什么？](#11-list-是什么)
-    - [1.2  LinkedList 是什么？](#12-linkedlist-是什么)
-  - [2. 源码分析](#2-源码分析)
-    - [2.1 类声明](#21-类声明)
-    - [2.2 成员](#22-成员)
-    - [2.3 内部私有类 Node 类](#23-内部私有类-node-类)
-    - [2.4 构造方法](#24-构造方法)
-    - [2.5 添加方法](#25-添加方法)
-      - [2.5.1 add(E e)](#251-adde-e)
-      - [2.5.2 add(int index, E element)](#252-addint-index-e-element)
-      - [2.5.3 addLast(E e)](#253-addlaste-e)
-      - [2.5.4 addFirst(E e)](#254-addfirste-e)
-      - [2.5.5 addAll(Collection  c )](#255-addallcollection-c)
-    - [2.6 获取方法](#26-获取方法)
-      - [2.6.1 get(int index)](#261-getint-index)
-      - [2.6.2 获取头结点方法](#262-获取头结点方法)
-      - [2.6.3 获取尾节点方法](#263-获取尾节点方法)
-      - [2.6.4 根据对象得到索引](#264-根据对象得到索引)
-        - [2.6.4.1 从头到尾找](#2641-从头到尾找)
-        - [2.6.4.1 从尾到头找](#2641-从尾到头找)
-      - [2.6.5 contains(Object o)](#265-containsobject-o)
-    - [2.7 删除方法](#27-删除方法)
-      - [2.7.1 remove(int index)](#271-removeint-index)
-      - [2.7.2 **remove(Object o)**](#272-removeobject-o)
-      - [2.7.3 删除头结点](#273-删除头结点)
-
-<!-- /code_chunk_output -->
-
-# LinkedList 源码分析
-
-## 1. LinkedList 概述
-
-### 1.1  List 是什么？
-
- <div align="center">
-	<img src="images/java-javase-basis-collection-001.png" style="zoom:80%">
-</div>
-
+<img src="images/java-javase-basis-collection-001.png" style="zoom:80%">
 
 List 在 Collection中充当着一个什么样的身份呢？——有序的 collection(也称为序列) 
 
 实现这个接口的用户以对列表中每个元素的插入位置进行精确地控制。用户可以根据元素的整数索引（在列表中的位置）访问元素，并搜索列表中的元素。与 set 不同，列表通常允许重复的元素。
 
-### 1.2  LinkedList 是什么？
+## 1.2  LinkedList 是什么？
 
 LinkedList 的本质就是一个**双向链表**，但是它也可以被当做堆栈、队列或双端队列进行操作。
 
 其特点为：查询慢，增删快，线程不安全，效率高。
 
+# 2. 源码分析
 
-
-## 2. 源码分析
-
-### 2.1 类声明
+## 2.1 类声明
 
 先来看一下类的声明，有一个继承（抽象类）和四个接口关系
 
@@ -76,7 +35,7 @@ public class LinkedList<E>
 
 - `java.io.Serializable` ：实现它意味着支持序列化，满足了序列化传输的条件
 
-### 2.2 成员
+## 2.2 成员
 
 ```java
 // 集合的长度
@@ -89,7 +48,7 @@ transient Node<E> first;
 transient Node<E> last;
 ```
 
-### 2.3 内部私有类 Node 类
+## 2.3 内部私有类 Node 类
 
 从源码刚开始就提到了 `transient Node<E> first;` 等内容，这里就涉及到一个内部私有的类，即 Node 类，它本质就是封装了一个节点类，只要知道链表这种基本的数据结构，这里还是很简单的。
 
@@ -110,7 +69,7 @@ private static class Node<E> {
 }
 ```
 
-### 2.4 构造方法
+## 2.4 构造方法
 
 ```java
 /**
@@ -128,9 +87,9 @@ public LinkedList(Collection<? extends E> c) {
 }
 ```
 
-### 2.5 添加方法
+## 2.5 添加方法
 
-#### 2.5.1 add(E e)
+### 2.5.1 add(E e)
 
 ```java
 public boolean add(E e) {
@@ -167,7 +126,7 @@ void linkLast(E e) {
 - 当前链表为空，添加进来的 node 节点自然就是 first，也是 last，也正因为这一点，在滴啊参构造函数赋值的时候，就已经确定了其 prev 和 next 都为 null
 - 当前链表不为空，那么添加进来的 node 节点就是 last ，node 的 prev 指向以前的最后一个元素（旧的 last），node 的 next，自然也是 null
 
-#### 2.5.2 add(int index, E element)
+### 2.5.2 add(int index, E element)
 
 ```java
 /**
@@ -215,7 +174,7 @@ void linkBefore(E e, Node<E> succ) {
 
 其实这里和前面 add 到末尾是没什么区别的，只是多了一个定位插入位置的过程。
 
-#### 2.5.3 addLast(E e)
+### 2.5.3 addLast(E e)
 
 不解释了，和 add(E e) 是一样的，将元素添加到链表尾部
 
@@ -225,7 +184,7 @@ public void addLast(E e) {
 }
 ```
 
-#### 2.5.4 addFirst(E e)
+### 2.5.4 addFirst(E e)
 
 ```java
 /**
@@ -252,7 +211,7 @@ private void linkFirst(E e) {
 - 如果链表为空，则头尾部节点就都是这个新节点 newNode
 - 如果不为空，则将头节点的前驱指针指向新节点，也就是指向前一个元素
 
-#### 2.5.5 addAll(Collection  c )
+### 2.5.5 addAll(Collection  c )
 
 ```java
 /**
@@ -317,9 +276,9 @@ public boolean addAll(int index, Collection<? extends E> c) {
 }
 ```
 
-### 2.6 获取方法
+## 2.6 获取方法
 
-#### 2.6.1 get(int index)
+### 2.6.1 get(int index)
 
 ```java
 /**
@@ -350,7 +309,7 @@ Node<E> node(int index) {
 }
 ```
 
-#### 2.6.2 获取头结点方法
+### 2.6.2 获取头结点方法
 
 ```java
 public E getFirst() {
@@ -379,7 +338,7 @@ public E peekFirst() {
 }
 ```
 
-#### 2.6.3 获取尾节点方法
+### 2.6.3 获取尾节点方法
 
 ```java
 public E getLast() {
@@ -397,9 +356,9 @@ public E peekLast() {
 }
 ```
 
-#### 2.6.4 根据对象得到索引
+### 2.6.4 根据对象得到索引
 
-##### 2.6.4.1 从头到尾找
+#### 2.6.4.1 从头到尾找
 
 ```java
 public int indexOf(Object o) {
@@ -423,7 +382,7 @@ public int indexOf(Object o) {
 }
 ```
 
-##### 2.6.4.1 从尾到头找
+#### 2.6.4.1 从尾到头找
 
 ```java
 public int lastIndexOf(Object o) {
@@ -447,7 +406,7 @@ public int lastIndexOf(Object o) {
 }
 ```
 
-#### 2.6.5 contains(Object o)
+### 2.6.5 contains(Object o)
 
 ```java
 /**
@@ -458,9 +417,9 @@ public boolean contains(Object o) {
 }
 ```
 
-### 2.7 删除方法
+## 2.7 删除方法
 
-#### 2.7.1 remove(int index)
+### 2.7.1 remove(int index)
 
 ```java
 /**
@@ -474,7 +433,7 @@ public E remove(int index) {
 }
 ```
 
-#### 2.7.2 **remove(Object o)**
+### 2.7.2 remove(Object o)
 
 ```java
 /**
@@ -541,7 +500,7 @@ E unlink(Node<E> x) {
 }
 ```
 
-#### 2.7.3 删除头结点
+### 2.7.3 删除头结点
 
 几个方法套娃，最后都是调用的 unlinkFirst() 方法
 
@@ -584,7 +543,7 @@ private E unlinkFirst(Node<E> f) {
 }
 ```
 
-2.7.4 删除尾结点
+### 2.7.4 删除尾结点
 
 ```java
 public E removeLast() {

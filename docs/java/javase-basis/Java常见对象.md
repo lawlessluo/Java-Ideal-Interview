@@ -1,39 +1,8 @@
-
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-- [三 Java 常见对象](#三-java-常见对象)
-  - [1. 基本归纳](#1-基本归纳)
-    - [1.1 Object 类](#11-object-类)
-    - [2.2 String 类](#22-string-类)
-  - [2. 题目总结](#2-题目总结)
-    - [2.1 == 和 equals 的区别？](#21-和-equals-的区别)
-    - [2.2 如何比较两个对象内容是否相同？（重写 equals）](#22-如何比较两个对象内容是否相同重写-equals)
-    - [2.3 hashCode() 和 equals()](#23-hashcode-和-equals)
-      - [2.3.1 什么是 hashCode() 和 equals()](#231-什么是-hashcode-和-equals)
-      - [2.3.2 equals() 已经实现功能了，还需要 hashCode() 做什么？](#232-equals-已经实现功能了还需要-hashcode-做什么)
-      - [2.3.3 为什么不全部使用高效率的 hashCode()，还要用 equals()?](#233-为什么不全部使用高效率的-hashcode还要用-equals)
-      - [2.3.4 hashCode() 和 equals() 是如何一起判断保证高效又可靠的？](#234-hashcode-和-equals-是如何一起判断保证高效又可靠的)
-      - [2.3.5 为什么重写 equals 时必须重写 hashCode 方法？](#235-为什么重写-equals-时必须重写-hashcode-方法)
-    - [2.4 深拷贝和浅拷贝的区别？](#24-深拷贝和浅拷贝的区别)
-    - [2.5 为什么重写 toString() 方法？](#25-为什么重写-tostring-方法)
-    - [2.6 字符串使用 += 赋值后，原始的String对象中的内容会改变吗？](#26-字符串使用-赋值后原始的string对象中的内容会改变吗)
-    - [2.7 字符串构造函数赋值和直接赋值的区别？](#27-字符串构造函数赋值和直接赋值的区别)
-    - [2.8 String、StringBuffer、StringBuilder的区别](#28-string-stringbuffer-stringbuilder的区别)
-    - [2.9 字符串 “+” 和 StringBuilder 选择用哪个？](#29-字符串-和-stringbuilder-选择用哪个)
-
-<!-- /code_chunk_output -->
-
-
-
-# 三 Java 常见对象
-
 **说明**：本章主要涉及到了：Object类、Scanner类、String类、StringBuffer和StringBuilder、Arrays工具类、基本类型包装类、正则表达式、System类、Math、Random类、BigInteger和BigDecimal类、Date、DateFormat和Calendar类
 
 **补充**：由于 Object 以及 String 类属于高频内容，所以总结题目以及小点知识之前，会对其做一个基本的归纳复习。
 
-## 1. 基本归纳
+# 1. 基本归纳
 
 在讲解这些常见类之前，我们不得不简单的提一下什么是API，先贴一组百度百科的解释：
 
@@ -41,7 +10,7 @@
 
 简单的说：就是 Java 中有好多现成的类库，其中封装了许多函数，只提供函数名和参数，但隐藏了函数的具体实现，这些可见的部分作为与外界联系的桥梁，也就是我们所称的 API ，不过由于Java是开源的，所以这些隐藏的实现我们也是可以看到的。
 
-### 1.1 Object 类
+## 1.1 Object 类
 
 - Object 是类层次结构的**根类**，所有的类都隐式的（不用写extends）继承自Object类。
 - Java 所有的对象都拥有Object默认方法
@@ -94,7 +63,7 @@ public final void wait() throws InterruptedException
 protected void finalize() throws Throwable { }
 ```
 
-### 2.2 String 类
+## 2.2 String 类
 
 String 是一个很常用的类，简单归纳一下常见的方法
 
@@ -222,9 +191,9 @@ int compareTo(String str)
 int compareToIgnoreCase(String str) 
 ```
 
-## 2. 题目总结
+# 2. 题目总结
 
-### 2.1 == 和 equals 的区别？
+## 2.1 == 和 equals 的区别？
 
 `==` ：如果比较的对象是基本数据类型，则比较的是数值是否相等；如果比较的是引用数据类型，则比较的是对象
 
@@ -232,7 +201,7 @@ int compareToIgnoreCase(String str)
 
 `equals()`：equals 方法不能用于基本数据类型的变量，如果没有对 equals 方法进行重写，则比较的是引用类型的变量所指向的对象的地址。一般会选择重写此方法，来比较两个对象的内容是否相等，相等则返回 true。
 
-### 2.2 如何比较两个对象内容是否相同？（重写 equals）
+## 2.2 如何比较两个对象内容是否相同？（重写 equals）
 
 例如一个 Student 类，new 两个对象出来，单纯的想比较内容是否相同如何做呢。
 
@@ -294,9 +263,9 @@ public boolean equals(Object o) {
 
 
 
-### 2.3 hashCode() 和 equals()
+## 2.3 hashCode() 和 equals()
 
-#### 2.3.1 什么是 hashCode() 和 equals()
+### 2.3.1 什么是 hashCode() 和 equals()
 
 `hashCode()` 方法是 Object 类中的一个本地方法（用 c 语言或 c++ 实现的），会返回该对象的哈希码，也称为散列码；其本质是返回一个 int 整数。哈希码的作用是确定该对象在哈希表中的索引位置。可以通过散列码，在散列表中根据“键”快速的检索出对应的“值”。从而快速找到需要的对象，然后进行判断是不是同一个对象。
 
@@ -308,21 +277,21 @@ public native int hashCode();
 
 总结：单考虑目的两者是差不多的，都是用来对比两个对象是否相等一致。
 
-#### 2.3.2 equals() 已经实现功能了，还需要 hashCode() 做什么？
+### 2.3.2 equals() 已经实现功能了，还需要 hashCode() 做什么？
 
 重写 equals() 里面的内容一般比较全面周详，但是效率就比较低，例如：如果集合中现在已经有2000个元素，那么第2001个元素加入集合时，它就要调用 2000次 equals方法。
 
 而使用 hashCode() ，其使用的哈希算法也称为散列算法，是将数据依特定算法直接指定到一个地址上，所以 hashCode() 这种形成 hash 码的方式比较是比较高效的。
 
-#### 2.3.3 为什么不全部使用高效率的 hashCode()，还要用 equals()?
+### 2.3.3 为什么不全部使用高效率的 hashCode()，还要用 equals()?
 
  hashCode() 方法不是一个 100% 可靠的方法，个别情况下，不同的对象生成的 hashcode 也可能会相同。
 
-#### 2.3.4 hashCode() 和 equals() 是如何一起判断保证高效又可靠的？
+### 2.3.4 hashCode() 和 equals() 是如何一起判断保证高效又可靠的？
 
 如果大量内容都是用 equals() 去比对，效率显然是比较低的，所以每次比对之前都去使用 hashCode() 去对比，如果返回的 hashCode 不同，代表两个对象肯定不相同，就可以直接返回结果了。如果 hashCode 相同，又为了保证其绝对可靠，所以使用 equals() 再次进行比对，同样是相同，就保证了这两个对象绝对相同。
 
-#### 2.3.5 为什么重写 equals 时必须重写 hashCode 方法？
+### 2.3.5 为什么重写 equals 时必须重写 hashCode 方法？
 
 如果重写了 equals() 而未重写 hashcode() 方法，可能就会出现两个字面数据相同的对象（例如下面 stu1 和 stu2） equals 相同（因为 equals 都是根据对象的特征进行重写的），但 hashcode 不相同的情况。
 
@@ -353,7 +322,7 @@ stu2.hashCode();
 > - 如果自定义对象做为 Map 的键，那么必须重写 hashCode 和 equals。
 > - String 重写了 hashCode 和 equals 方法，所以我们可以非常愉快地使用 String 对象作为 key 来使用。
 
-### 2.4 深拷贝和浅拷贝的区别？
+## 2.4 深拷贝和浅拷贝的区别？
 
 **浅拷贝（浅克隆）**：基本数据类型为值传递，对象类型为引用传递（两者同生共死）
 
@@ -528,7 +497,7 @@ B: 1163157884
 
 可以看到，B 克隆 A 后，修改 A 中 合作伙伴 的值，没有受到影响，这也就是我们通常意义上想要实现的效果了。
 
-### 2.5 为什么重写 toString() 方法？
+## 2.5 为什么重写 toString() 方法？
 
 主要目的还是为了简化输出
 
@@ -544,7 +513,7 @@ B: 1163157884
 >
 > 通常我们希望， `toString` 方法会返回一个“以文本方式表示” 此对象的字符串。结果应是一个简明但易于读懂的信息表达式。因此建议所有子类都重写此方法。
 
-### 2.6 字符串使用 += 赋值后，原始的String对象中的内容会改变吗？
+## 2.6 字符串使用 += 赋值后，原始的String对象中的内容会改变吗？
 
 答案：不会
 
@@ -568,7 +537,7 @@ s:HelloWorld
 
 **总结**：开发中，尽量少使用 + 进行字符串的拼接，尤其是循环内，我们更加推荐使用StringBuild、StringBuffer。
 
-### 2.7 字符串构造函数赋值和直接赋值的区别？
+## 2.7 字符串构造函数赋值和直接赋值的区别？
 
 通过 new 构造函数创建字符串对象。String s = new String("Hello");  系统会先创建一个匿名对象 "Hello" 存入堆内存，而后 new 关键字会在堆内存中又开辟一块新的空间，然后把"Hello"存进去，并且把地址返回给栈内存中的 s, 刚才的匿名对象 "Hello" 就变成了一个垃圾对象，因为它没有被任何栈中的变量指向，会被GC自动回收。
 
@@ -582,7 +551,7 @@ String s = "Hello";
 
 **总结**：前者new一个对象，“hello”隐式创建一个对象，后者只有“Hello”创建一个对象，在开发中，尽量使用 String s = "Hello" 的方式，效率比另一种高。
 
-### 2.8 String、StringBuffer、StringBuilder的区别
+## 2.8 String、StringBuffer、StringBuilder的区别
 
 > 前面我们用字符串做拼接，比较耗时并且也耗内存（每次都会构造一个新的string对象），而这种拼接操作又是比较常见的，为了解决这个问题，Java就提供了两个字符串缓冲区类。StringBuffer和StringBuilder供我们使用。
 
@@ -612,7 +581,7 @@ StringBuilder：长度可变、线程不安全、速度最快
 2. 单线程操作字符串缓冲区 下操作大量数据  StringBuilder
 3. 多线程操作字符串缓冲区 下操作大量数据  StringBuffer
 
-### 2.9 字符串 “+” 和 StringBuilder 选择用哪个？
+## 2.9 字符串 “+” 和 StringBuilder 选择用哪个？
 
 首先java并不支持运算符重载（String类中的 “+” 和 “+=” 是 Java 中仅有的两个重载过的运算符），所以我们可以通过 “+” 符号 将多个字符串进行拼接
 
@@ -620,9 +589,7 @@ StringBuilder：长度可变、线程不安全、速度最快
 
 我们可以看到代码被编译器自动优化成使用StringBuilder方式拼接，运行效率得到了保证
 
- <div align="center">
-	<img src="images/java-javase-basis-004.png" style="zoom:60%">
-</div>
+<img src="images/java-javase-basis-004.png" style="zoom:60%">
 
 下面一个案例  **数组拼接成指定格式的字符串**  代码中使用了循环语句
 
@@ -657,9 +624,9 @@ public class StringBuilderDemo {
 
 使用String方式进行拼接，我们反编译可以看到，StringBuilder被创建在循环的内部，这意味着每循环一次就会创建一次StringBuilder对象，这可是一个糟糕的事情。
 
-<div align="center">
-	<img src="images/java-javase-basis-005.png" style="zoom:60%">
-</div>
+
+<img src="images/java-javase-basis-005.png" style="zoom:60%">
+
 
 ```java
 // 在循环中使用StringBuilder拼接字符串
@@ -696,8 +663,3 @@ public class StringBuilderDemo2 {
 如果字符串操作比较简单，就可以使用 “+” 运算符操作，编译器会为你合理的构造出最终的字符串结果
 
 如果使用循环语句 最好自己手动创建一个StringBuilder对象，用它来构最终结果
-
-
-
-
-

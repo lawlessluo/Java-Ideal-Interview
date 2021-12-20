@@ -1,69 +1,20 @@
----
-面试专题-JavaSE-集合-001-ArrayList源码分析
----
+# 1. ArrayList 概述
 
+## 1.1  List 是什么？
 
-
-- [一 ArrayList 源码分析（含扩容机制分析）](#一-arraylist-源码分析含扩容机制分析)
-  - [1. ArrayList 概述](#1-arraylist-概述)
-    - [1.1  List 是什么？](#11-list-是什么)
-    - [1.2  ArrayList 是什么？](#12-arraylist-是什么)
-    - [1.3 顺序表的优缺点](#13-顺序表的优缺点)
-    - [1.4 时间复杂度证明](#14-时间复杂度证明)
-  - [2. 核心源码分析](#2-核心源码分析)
-    - [2.1 类声明](#21-类声明)
-    - [2.2 类成员](#22-类成员)
-    - [2.4 构造方法](#24-构造方法)
-    - [2.5 最小化实例容量方法](#25-最小化实例容量方法)
-    - [2.5 扩容方法](#25-扩容方法)
-    - [2.6 常规方法](#26-常规方法)
-  - [3. 重点内容分析](#3-重点内容分析)
-    - [3.1 扩容机制再分析](#31-扩容机制再分析)
-      - [3.1.1 ArrayList 是如何被初始化的](#311-arraylist-是如何被初始化的)
-      - [3.1.2 扩容机制流程分析（无参构造为例）](#312-扩容机制流程分析无参构造为例)
-        - [3.1.2.1 add()](#3121-add)
-        - [3.1.2.2 ensureCapacityInternal()](#3122-ensurecapacityinternal)
-        - [3.1.2.3 calculateCapacity()](#3123-calculatecapacity)
-        - [3.1.2.4 ensureExplicitCapacity](#3124-ensureexplicitcapacity)
-        - [3.1.2.5 grow()](#3125-grow)
-        - [3.1.2.6 hugeCapacity()](#3126-hugecapacity)
-    - [3.2 System.arraycopy() 和 Arrays.copyOf() 复制方法](#32-systemarraycopy-和-arrayscopyof-复制方法)
-      - [3.2.1 System.arraycopy()](#321-systemarraycopy)
-      - [3.2.2  Arrays.copyOf()](#322-arrayscopyof)
-    - [3.3 removeAll() 和 retainAll() 中的 batchRemove() 方法](#33-removeall-和-retainall-中的-batchremove-方法)
-    - [3.4 并发修改异常问题探索](#34-并发修改异常问题探索)
-      - [3.4.1 原因解释：](#341-原因解释)
-      - [3.4.2 解决方案：](#342-解决方案)
-        - [3.4.2.1 方式1：迭代器迭代元素，迭代器修改元素](#3421-方式1迭代器迭代元素迭代器修改元素)
-        - [3.4.2.1 方式2：集合遍历元素，集合修改元素（普通for）](#3421-方式2集合遍历元素集合修改元素普通for)
-      - [3.4.3 iterator.remove() 的弊端](#343-iteratorremove-的弊端)
-
-
-
-# 一 ArrayList 源码分析（含扩容机制分析）
-
-## 1. ArrayList 概述
-
-### 1.1  List 是什么？
-
- <div align="center">
-	<img src="images/java-javase-basis-collection-001.png" style="zoom:80%">
-</div>
-
+<img src="images/java-javase-basis-collection-001.png" style="zoom: 80%;" />
 
 List 在 Collection中充当着一个什么样的身份呢？——有序的 collection(也称为序列) 
 
-
-
 实现这个接口的用户以对列表中每个元素的插入位置进行精确地控制。用户可以根据元素的整数索引（在列表中的位置）访问元素，并搜索列表中的元素。与 set 不同，列表通常允许重复的元素。
 
-### 1.2  ArrayList 是什么？
+## 1.2  ArrayList 是什么？
 
 `ArrayList` 的底层就是一个数组，依赖其扩容机制（后面会提到）它能够实现容量的动态增长，所以 ArrayList 就是数据结构中顺序表的一种具体实现。
 
 其特点为：查询快，增删慢，线程不安全，效率高。
 
-### 1.3 顺序表的优缺点
+## 1.3 顺序表的优缺点
 
 **优点：**
 
@@ -76,7 +27,7 @@ List 在 Collection中充当着一个什么样的身份呢？——有序的 col
 
 2. 插入和**删除操作需要移动大量的元素，效率较低**
 
-### 1.4 时间复杂度证明
+## 1.4 时间复杂度证明
 
 **读取**：
 
@@ -102,9 +53,9 @@ $$Loc(a_i) = Loc(a_1) + (i -1)*L$$
 
 
 
-## 2. 核心源码分析
+# 2. 核心源码分析
 
-### 2.1 类声明
+## 2.1 类声明
 
 先来看一下类的声明，有一个继承（抽象类）和四个接口关系
 
@@ -122,7 +73,7 @@ public class ArrayList<E> extends AbstractList<E>
 
 - `java.io.Serializable` ：实现它意味着支持序列化，满足了序列化传输的条件
 
-### 2.2 类成员
+## 2.2 类成员
 
 下面接着看一些成员属性
 
@@ -157,7 +108,7 @@ transient Object[] elementData; // non-private to simplify nested class access
 private int size;
 ```
 
-### 2.4 构造方法
+## 2.4 构造方法
 
 ```java
 /**
@@ -206,7 +157,7 @@ public ArrayList(Collection<? extends E> c) {
 }
 ```
 
-### 2.5 最小化实例容量方法
+## 2.5 最小化实例容量方法
 
 ```java
 /**
@@ -224,7 +175,7 @@ public void trimToSize() {
 }
 ```
 
-### 2.5 扩容方法
+## 2.5 扩容方法
 
 这里只是按照顺序介绍，后面还会专门针对扩容进行一个分析
 
@@ -314,7 +265,7 @@ private static int hugeCapacity(int minCapacity) {
 }
 ```
 
-### 2.6 常规方法
+## 2.6 常规方法
 
 ```java
 /**
@@ -755,19 +706,19 @@ private class Itr implements Iterator<E> {
 
 ```
 
-## 3. 重点内容分析
+# 3. 重点内容分析
 
-### 3.1 扩容机制再分析
+## 3.1 扩容机制再分析
 
-#### 3.1.1 ArrayList 是如何被初始化的
+### 3.1.1 ArrayList 是如何被初始化的
 
 ArrayList 提供了 1 个无参构造和 2 个带参构造来初始化 ArrayList ，我们在创建 ArrayList  时，经常使用无参构造的方式，其本质就是初始化了一个空数组，直到向数组内真的添加元素的时候才会真的去分配容量。例如：向数组中添加第一个元素，数组容量扩充为 10 
 
 > 补充：JDK7 无参构造 初始化 ArrayList 对象时，直接创建了长度是 10 的 Object[] 数组elementData 
 
-#### 3.1.2 扩容机制流程分析（无参构造为例）
+### 3.1.2 扩容机制流程分析（无参构造为例）
 
-##### 3.1.2.1 add()
+#### 3.1.2.1 add()
 
 一般来说，都是通过 add 方法触发扩容机制，我们拿最简单的尾部追加的 add() 方法举例
 
@@ -786,7 +737,7 @@ public boolean add(E e) {
 
 核心要点就这一句 `ensureCapacityInternal(size + 1);` 
 
-##### 3.1.2.2 ensureCapacityInternal()
+#### 3.1.2.2 ensureCapacityInternal()
 
 追踪进去
 
@@ -803,7 +754,7 @@ private void ensureCapacityInternal(int minCapacity) {
 
 先来分析一下这个参数的结果是什么，聚焦到 `calculateCapacity()` 方法中去
 
-##### 3.1.2.3 calculateCapacity()
+#### 3.1.2.3 calculateCapacity()
 
 ```java
 /**
@@ -823,7 +774,7 @@ private static int calculateCapacity(Object[] elementData, int minCapacity) {
 
 如果数组已经不是为空了，就直接返回一个 minCapacity （size + 1）就可以了
 
-##### 3.1.2.4 ensureExplicitCapacity
+#### 3.1.2.4 ensureExplicitCapacity
 
 ensureCapacityInternal 方法内调用了 `ensureExplicitCapacity(参数已经计算出来了)` 方法
 
@@ -851,7 +802,7 @@ private void ensureExplicitCapacity(int minCapacity) {
   - 添加第 3 ... 10 个元素的时候，都是一样的。
 - add 第 11 个元素的时候，minCapacity  变成了 11，比 10 还要大，所以又一次进去扩容了
 
-##### 3.1.2.5 grow()
+#### 3.1.2.5 grow()
 
 这里是真正去执行扩容逻辑的代码
 
@@ -918,11 +869,11 @@ private static int hugeCapacity(int minCapacity) {
 }
 ```
 
-### 3.2 System.arraycopy() 和 Arrays.copyOf() 复制方法
+## 3.2 System.arraycopy() 和 Arrays.copyOf() 复制方法
 
 在前面的方法中，大量的用到了这两个方法，基本但凡涉及到元素移动的都会用到。
 
-#### 3.2.1 System.arraycopy()
+### 3.2.1 System.arraycopy()
 
 拿 add 方法中的举例
 
@@ -987,7 +938,7 @@ public static void main(String[] args) {
 
 这样就实现了 add 中的一个指定下标插入操作（不考虑扩容）
 
-#### 3.2.2  Arrays.copyOf()
+### 3.2.2  Arrays.copyOf()
 
 所以，可以简单的认为，这个方法的目的只要是为了给原数组扩容。
 
@@ -1010,7 +961,7 @@ public static void main(String[] args) {
 [1, 2, 3, 4, 5]
 [1, 2, 3, 4, 5, 0, 0, 0, 0, 0]
 
-### 3.3 removeAll() 和 retainAll() 中的 batchRemove() 方法
+## 3.3 removeAll() 和 retainAll() 中的 batchRemove() 方法
 
 在 removeAll() 和 retainAll() 方法中，都调用了  batchRemove()方法，区别只是传参不同，就能实现两种不同的正反删除效果
 
@@ -1128,7 +1079,7 @@ if (w != size) {
 
 
 
-### 3.4 并发修改异常问题探索
+## 3.4 并发修改异常问题探索
 
 ```java
 public static void main(String[] args) {
@@ -1156,7 +1107,7 @@ Exception in thread "main" java.util.ConcurrentModificationException
 
 使用增强for或者迭代器遍历集合的时候，如果对集合进行 list的 remove 和 add 操作，会出现 ConcurrentModificationException 并发修改异常的问题。
 
-#### 3.4.1 原因解释：
+### 3.4.1 原因解释：
 
 当我们对集合进行遍历的时候，我们会获取当前集合的迭代对象
 
@@ -1182,9 +1133,9 @@ final void checkForComodification() {
 
 针对这个问题，我们给出两个解决方案
 
-#### 3.4.2 解决方案：
+### 3.4.2 解决方案：
 
-##### 3.4.2.1 方式1：迭代器迭代元素，迭代器修改元素
+#### 3.4.2.1 方式1：迭代器迭代元素，迭代器修改元素
 
 我们假想如果Iterator迭代器中有添加或者删除等功能就好了，但很遗憾并没有，但是它的子接口 ListIterator 却拥有 add 这个功能（ListIterator 拥有 add、set、remove 方法，Iterator 拥有 remove 方法，这里只演示 add 方法，remove 方法就用原来的 Iterator .remove()  ）
 
@@ -1222,7 +1173,7 @@ I love you
 I love ❤ you 
 ```
 
-##### 3.4.2.1 方式2：集合遍历元素，集合修改元素（普通for）
+#### 3.4.2.1 方式2：集合遍历元素，集合修改元素（普通for）
 
 ```java
 import java.util.ArrayList;
@@ -1257,7 +1208,7 @@ I love you ❤
 
 补充：增强for循环实现将集合进行遍历，也产生了并发修改异常，这是因为增强for在底层也是调用的集合本身的 remove
 
-#### 3.4.3 iterator.remove() 的弊端
+### 3.4.3 iterator.remove() 的弊端
 
 - Iterator 只有 remove() 方法，add 方法在 ListIterator  中有
 -  remove 之前必须先调用 next，remove 开始就对 lastRet 做了不能小于 0 的校验，而l astRet 初始化值为 -1

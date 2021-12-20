@@ -1,29 +1,13 @@
-<p align="center">
-    <a href="#" target="_blank">
-        <img src="images/common-001.png" style="zoom:80%">
-	</a>
-</p>
-<p align="center">
-    <a href="#">
-        <img src="https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E9%98%85%E8%AF%BB-read-%2303899b" alt="在线阅读，敬请期待">
-    </a>
-    <a href="#公众号">
-        <img src="https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-%E7%90%86%E6%83%B3%E4%BA%8C%E6%97%AC%E4%B8%8D%E6%AD%A2-%2305a6bc" alt="公众号|理想二旬不止">
-    </a>
-    <a href="https://www.ideal-20.cn">
-        <img src="https://img.shields.io/badge/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-Blog-%2306b9ce" alt="理想二旬不止|Blog">
-    </a>
-    <a href="https://juejin.cn/user/1591748568815655">
-        <img src="https://img.shields.io/badge/%E6%8E%98%E9%87%91-juejin-%2375ccdf" alt="掘金社区|BWH_Steven">
-    </a>
-    <a href="https://www.zhihu.com/people/zi-shen-si">
-        <img src="https://img.shields.io/badge/%E7%9F%A5%E4%B9%8E-zhihu-%23bce2ef" alt="知乎|BWH_Steven">
-    </a>
-</p>  
+
+ <p>
+ 		<img src="images/common-001.png" style="zoom:80%">
+ </p>
+
+
 
 ## 🔥️ 关于 Java-Ideal-Interview
 
-**创作原因**：2021年找实习的准程序员，软件工程专业，大一开始自学 Java，一路跌跌撞撞，深知学习路线、资料、文章、面试题之繁杂。以 Copy 为主，且不加以排版，或爬虫抓取，图片挂掉的文章，常占据搜索引擎较高权重，位列榜首。这几年长期与同学、朋友、师弟师妹等交流讨论，很清楚自学者或学生学习 Java 的痛点和一些巨坑，所以计划整理一份可以快速阅读/学习的 Java 后端的开源文章项目。
+**创作原因**：博主学习 Java 的这几年一路跌跌撞撞，深知学习路线、资料、文章、面试题之繁杂。以 Copy 为主，且不加以排版，或爬虫抓取，图片挂掉的文章，常占据搜索引擎较高权重，位列榜首。这几年长期与同事、同学、朋友、师弟师妹等交流讨论，很清楚自学者或学生学习 Java 的痛点和一些巨坑，所以计划整理一份可以快速阅读/学习的 Java 后端的开源文章项目。
 
 **项目定位**：专注 Java 后端面试题 + 解析 + 重点知识详解 + 精选文章的开源项目，希望它能伴随你我一直进步！
 
@@ -34,59 +18,71 @@
 - ① Java 初学者，可根据项目学习路线，配合项目提供的资料，往期更新的系列文章，以及网络资源（哔哩哔哩、慕课）等进行有针对性的学习计划。
 - ② Java 初级面试者，可重点关注面试可能会涉及的知识点，配合解析，查缺补漏，有效复习。
 
-## 💡 关于文章阅读：
 
-PC 端文章阅读可选择：掘金、知乎、我的个人博客
 
-移动端最佳阅读方式为微信公众号：【理想二旬不止】（ 40w+ 字数干货输出，以及资源分享等你来）
+## 💡 关于克隆：
+持续更新中，若认为 Gitee 或 Github 阅读不便，可克隆到本地配合 Typora 等编辑器舒适阅读
 
 注：所有涉及图片未使用网络图床，均开源提供给大家。
 
-持续更新中，在线阅读将会在后期提供，若认为 Gitee 或 Github 阅读不便，可克隆到本地配合 Typora 等编辑器舒适阅读
-
 若 Github 克隆速度过慢，可选择使用国内 Gitee 仓库 [Java-Ideal-Interview - 码云（Gitee） ](https://gitee.com/ideal-20/java-ideal-interview)
 
-1. [掘金@BWH_Steven](https://juejin.cn/user/1591748568815655)
-2. [知乎@BWH_Steven](https://www.zhihu.com/people/zi-shen-si)
-3. [个人博客@BWH_Steven](https://www.ideal-20.cn)
-4. 微信公众号@理想二旬不止 🔥️
 
-<p align="center">
-    <img src="images/common-002.jpg" style="zoom:80%">
-</p>  
+
+## 💡 在线阅读：
+
+在线阅读已全面支持，同步持续更新：
+
+[【Java-Ideal-Interview 专栏】点击此处在线阅读](https://www.yuque.com/ideal-20/java-ideal-interview)
+
+同样欢迎大家阅读我的个人技术文章主页
+
+[【技术文章主页@二境志】点击此处跳转](https://www.yuque.com/ideal-20)
+
+
 
 ## 📖 目录：
 
-### ☕ 一 JavaSE
+### ☕ Java 基础
 
-**知识问答总结**
+1. **[Java 基础知识（Java入门常识概念 + 基础语法）](docs/java/javase-basis/Java基础知识.md)**
+2. **[Java 面向对象（类与对象 封装继承多态...）](docs/java/javase-basis/Java面向对象.md)**
+3. **[Java 常见对象（Object String ..）](docs/java/javase-basis/Java常见对象.md)**
+4. **[Java 集合（List、Set、Map 等）相关问答归纳再整理](docs/java/javase-basis/Java集合框架.md)**
+5. **[Java IO 异常 简单小结](docs/java/javase-basis/JavaIO和异常.md)**
 
-1. **[001-Java 基础知识（Java入门常识概念 + 基础语法）](docs/java/javase-basis/001-Java基础知识.md)**
-2. **[002-Java 面向对象（类与对象 封装继承多态...）](docs/java/javase-basis/002-Java面向对象.md)**
-3. **[003-Java 常见对象（Object String ..）](docs/java/javase-basis/003-Java常见对象.md)**
-4. **[004-Java 集合（List、Set、Map 等）相关问答归纳再整理](docs/java/javase-basis/004-Java集合框架.md)**
-5. **[005-Java IO 异常 简单小结](docs/java/javase-basis/005-JavaIO和异常.md)**
+**补充知识点：**
 
-**知识点：**
+1. **[ArrayList源码分析（含扩容机制等重点问题分析）](docs/java/javase-basis/collection/ArrayList源码分析（含扩容机制等重点问题分析）.md)**
+2. **[LinkedList源码分析（重点方法基本分析）](docs/java/javase-basis/collection/LinkedList源码分析（重点方法基本分析）.md)**
+3. **[HashMap源码分析（含散列表和红黑树介绍）](docs/java/javase-basis/collection/HashMap源码分析（含散列表和红黑树介绍）.md)**
 
-1. **[001-ArrayList源码分析（含扩容机制等重点问题分析）](docs/java/javase-basis/collection/001-ArrayList源码分析（含扩容机制等重点问题分析）.md)**
-2. **[002-LinkedList源码分析（重点方法基本分析）](docs/java/javase-basis/collection/002-LinkedList源码分析（重点方法基本分析）.md)**
-3. **[003-HashMap源码分析（含散列表和红黑树介绍）](docs/java/javase-basis/collection/003-HashMap源码分析（含散列表和红黑树介绍）.md)**
+### 🚥 多线程
 
-### 🚥 二  多线程
+1. **[多线程及并发知识问答总结](docs/java/multi-threading/多线程及并发知识问答总结.md)**
 
-**知识问答总结**
+### 👨🏻‍💻 JVM 虚拟机
 
-1. **[001-多线程及并发知识问答总结.md](docs/java/multi-threading/001-多线程及并发知识问答总结.md)**
+1. **[JVM知识问答总结.md](docs/java/jvm/JVM知识问答总结.md)**
 
-### 👨🏻‍💻 三 JVM 虚拟机
+### 🐳 数据库
 
-**知识问答总结**
+1. **[MySQL常见问答总结](docs/database/mysql/MySQL常见问答总结.md)**
+2. **[Redis常见问答总结](docs/database/redis/Redis常见问答总结)**
 
-1. **[001-JVM知识问答总结.md](docs/java/jvm/001-JVM知识问答总结.md)**
+### 🦁 常见框架
+
+1. **[MyBatis知识点梳理总结及常见问答](docs/framework/mybatis/MyBatis知识点梳理总结及常见问答.md)**
+2. **[Spirng常见概念及知识问答总结](docs/framework/spring/Spirng常见概念及知识问答总结.md)**
+3. **[SpringBoot常见知识问答总结](docs/framework/spring/SpringBoot常见知识问答总结.md)**
+
+### 🦖 计算机基础
+
+1. **[计算机网络常见问答总结](docs/computer-basis/network/计算机网络常见问答总结.md)**
+2. **[操作系统常见问答总结](docs/computer-basis/operating-system/操作系统常见问答总结.md)**
 
 
-2021 持续更新中，Star 不迷路，常回来看看哈 ......
+持续更新中，Star 不迷路，常回来看看哈 ......
 
 ## 📞 Contact me
 
