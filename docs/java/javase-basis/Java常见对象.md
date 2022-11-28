@@ -146,7 +146,7 @@ int indexOf(String str, int fromIndex)
 // 7. 从指定位置开始截取字符串，默认到末尾
 String substring(int start)
 
-// 8. 从指定位置开始指定位置结束截取字符串
+// 8. 从指定位置开始指定位置结束截取字符串，[start,end)
 String substring(int start, int end)
 ```
 
